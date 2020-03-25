@@ -3,21 +3,20 @@
 #define NUM 200
 #define STATES 3
 #define DO(n,x) {int i=0,_n=(n);for(;i<_n;++i){x;}}
-// #define OD(n,x) {int i=(n),for(;i>0;i--){x;}}
 
 char array_[TIL]; 			
 char* array = &array_[0];
 
 /*
-	TIL ^ TIL-1 ^ TIL-2 ^ ... ^ 1 ^ 0 is the equation 
-	there are STATES number of different ^ operators 
+	TIL _ TIL-1 _ TIL-2 _ ... _ 1 _ 0 is the equation 
+	there are STATES number of different _ operators 
 	which are kept in char* array
 
 	for ex operator between TIL-2 and TIL-3
 	contained at array[TIL-3] and so on
 
 	the question is how many equations kind of 
-	TIL ^ TIL-1  ^ ... ^ 1 ^ 0 are equal to NUM where ^ 
+	TIL _ TIL-1  _ ... _ 1 _ 0 are equal to NUM where _
 	can be '+', '-' or blank, TIL == 9, NUM == 200
 	
 	state numbers:
@@ -100,4 +99,4 @@ int main()
 	printf("\n_%d ways to get %d\n", cycle(pow_(STATES, TIL)), NUM);
 	return 0;
 }
-
+//:~
