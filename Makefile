@@ -1,2 +1,2 @@
 all: 
-	rm -f 200 && gcc -o 200 200.c && ./200
+	rm -f bin/200 && gcc -o bin/200 src/200.c && ./bin/200
