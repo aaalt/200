@@ -35,14 +35,12 @@ int pow_(int n, int exp) {
 
 /*	prints left part of the equation	*/
 void arrprint(char *array) {
-	int i;
-	for (i = TIL; i > 0; i--) {
-		printf("%lli", i);
-		if (array[i-1] == 1) 
+	DO(TIL,   
+		printf("%lli", TIL-i);
+		if (array[TIL-i-1] == 1) 
 			printf("+");
-		if (array[i-1] == 2) 
-			printf("-");
-	}
+		if (array[TIL-i-1] == 2) 
+			printf("-"))
 	printf("0\n");
 	fflush(stdout);
 }
@@ -50,47 +48,43 @@ void arrprint(char *array) {
 /*	return prev which is the equation result 
 	of states array and numbers TIL...0			*/
 long long eq(char* array) {
-	long long prev = 0, cur = TIL, i;
+	long long prev = 0, cur = TIL;
 	char a = 1;
 
-	for (i = TIL-1; i >= 0; i--) {
-		if (!array[i]) 
-			cur = cur*10 + i;
+	DO(TIL, 
+		if (!array[TIL-1-i])
+			cur = cur*10+TIL-1-i;
 		else {
 			prev += (a == 1 ? cur : -cur);
-			a = array[i]; cur = i;
-		}
-	}
+			a = array[TIL-1-i]; cur = TIL-1-i;
+		})
+
 	return (prev += (a == 1 ? cur : -cur));
 }
 
 /*	shift array to the next state works as column 
 	additon of 1 and char* array as a base-3 number  */
 void state(char* array) {
-	int i;
-
-	for (i = TIL-1; i >= 0; i--) {
-		if (array[i] >= 2) {
+	DO(TIL, 
+		if (array[i] >= 2) 
 			array[i] = 0;
-		}
 		else {
 			array[i]++;
 			break;
-		}
-	}
+		})
 }
 
 /*	consider all combinations of +-blank return cnt 
 	which is a counter of all suitable combinations	*/
 int cycle(int state_max) {
-	int i, cnt = 0;
+	int cnt = 0;
 
 	DO(state_max,		
-		{if (eq(array) == NUM)  {
+		if (eq(array) == NUM)  {
 			arrprint(array);
 			cnt++;
 		}
-		state(array);})
+		state(array))
 	return cnt;
 }
 
