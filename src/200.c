@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define TIL 9
+#define TIL 10
 #define NUM 200
 #define STATES 3
 #define DO(n,x) {int i=0,_n=(n);for(;i<_n;++i){x;}}
@@ -45,6 +45,12 @@ void arrprint(char *array) {
 	fflush(stdout);
 }
 
+long long decs(long long num) {
+	long long i;
+	for (i = 10; num/10; i*=10);
+	return i;
+}
+
 /*	return prev which is the equation result 
 	of states array and numbers TIL...0			*/
 long long eq(char* array) {
@@ -53,7 +59,7 @@ long long eq(char* array) {
 
 	DO(TIL, 
 		if (!array[TIL-1-i])
-			cur = cur*10+TIL-1-i;
+			cur = cur*decs(TIL-1-i)+TIL-1-i;
 		else {
 			prev += (a == 1 ? cur : -cur);
 			a = array[TIL-1-i]; cur = TIL-1-i;
